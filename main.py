@@ -5,7 +5,6 @@ import tensorflow as tf
 from PIL import Image
 import io
 import os
-import gdown
 
 app = FastAPI()
 
@@ -16,7 +15,7 @@ def download_model():
     if not os.path.exists(MODEL_PATH):
         print("Downloading model from Google Drive...")
         url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
-        gdown.download(url, MODEL_PATH, quiet=False)
+        os.system(f"wget --no-check-certificate 'https://drive.google.com/uc?export=download&id={GOOGLE_DRIVE_FILE_ID}' -O {MODEL_PATH}")
         print("Download complete!")
 
 download_model()

@@ -9,7 +9,7 @@ import os
 app = FastAPI()
 
 GOOGLE_DRIVE_FILE_ID = "1-9jS_gGDi9syUEv__sVF_s9CoowAQy9f"
-MODEL_PATH = "InceptionV3_for_brain_tumor_detection.h5"
+MODEL_PATH = "InceptionV3_for_brain_tumor_classification.h5"
 
 def download_model():
     if not os.path.exists(MODEL_PATH):

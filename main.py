@@ -5,6 +5,7 @@ import tensorflow as tf
 from PIL import Image
 import io
 import os
+import gdown
 
 app = FastAPI()
 
@@ -12,7 +13,7 @@ GOOGLE_DRIVE_FILE_ID = "1-9jS_gGDi9syUEv__sVF_s9CoowAQy9f"
 MODEL_PATH = "InceptionV3_for_brain_tumor_classification.h5"
 
 def download_model():
-    if not os.path.exists(MODEL_PATH):
+    if  os.path.exists(MODEL_PATH):
         print("Downloading model from Google Drive...")
         url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
         os.system(f"wget --no-check-certificate 'https://drive.google.com/uc?export=download&id={GOOGLE_DRIVE_FILE_ID}' -O {MODEL_PATH}")

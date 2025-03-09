@@ -10,14 +10,27 @@ import gdown
 app = FastAPI()
 
 GOOGLE_DRIVE_FILE_ID = "1-9jS_gGDi9syUEv__sVF_s9CoowAQy9f"
-MODEL_PATH = "InceptionV3_for_brain_tumor_classification.h5"
+MODEL_PATH = "InceptionV3_for_brain_tumor_detection.h5"
 
 def download_model():
     if  os.path.exists(MODEL_PATH):
+
+        os.remove(MODEL_PATH)
+        
         print("Downloading model from Google Drive...")
         url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
-        os.system(f"wget --no-check-certificate 'https://drive.google.com/uc?export=download&id={GOOGLE_DRIVE_FILE_ID}' -O {MODEL_PATH}")
+        gdown.download(url, MODEL_PATH, quiet=False, fuzzy=True)
         print("Download complete!")
+
+        if os.path.exists(MODEL_PATH):
+            
+            file_size = os.path.getsize(MODEL_PATH)
+            print(f"Download complete! File size: {file_size} bytes")
+            
+            if file_size < 10_000_000:  # Less than 10MB likely means it's a corrupted HTML file
+                print("ERROR: The downloaded file is too small. Please check the Google Drive link.")
+            else:
+                print("ERROR: Model download failed!")
 
 download_model()
 model = load_model(MODEL_PATH)  

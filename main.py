@@ -9,6 +9,8 @@ import gdown
 
 app = FastAPI()
 
+os.system("git lfs pull")
+
 GOOGLE_DRIVE_FILE_ID = "1-9jS_gGDi9syUEv__sVF_s9CoowAQy9f"
 MODEL_PATH = "InceptionV3_for_brain_tumor_classification.h5"
 
